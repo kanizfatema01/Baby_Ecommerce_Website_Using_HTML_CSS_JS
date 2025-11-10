@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Baby Store Homepage with Slider</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    /* Navbar */
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #fff;
+      padding: 10px 40px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .logo img {
+      height: 45px;
+    }
+
+    .search-bar {
+      flex: 1;
+      margin: 0 20px;
+      position: relative;
+    }
+
+    .search-bar input {
+      width: 100%;
+      padding: 8px 40px 8px 15px;
+      border: 1px solid #ccc;
+      border-radius: 25px;
+      outline: none;
+    }
+
+    .search-bar i {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #777;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #333;
+      font-size: 14px;
+    }
+
+    /* Category Bar */
+    .category-bar {
+      display: flex;
+      align-items: center;
+      background: #fdd835;
+      padding: 10px 40px;
+      font-weight: 500;
+      font-size: 14px;
+      overflow-x: auto;
+    }
+
+    .category-bar a {
+      margin-right: 25px;
+      text-decoration: none;
+      color: #333;
+      white-space: nowrap;
+    }
+
+    /* HERO SLIDER SECTION */
+    .hero-slider {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      height: 420px;
+      background: #fafafa;
+    }
+
+    .slides {
+      display: flex;
+      transition: transform 0.8s ease-in-out;
+      width: 100%;
+    }
+
+    .slide {
+      min-width: 100%;
+      height: 420px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 40px;
+      box-sizing: border-box;
+    }
+
+    /* Slide Content Layout */
+    .slide-content {
+      width: 50%;
+      padding: 20px;
+    }
+
+    .slide-content h2 {
+      font-size: 26px;
+      color: #7a4b2a;
+      margin-bottom: 10px;
+    }
+
+    .slide-content p {
+      color: #555;
+      font-size: 15px;
+      margin-bottom: 10px;
+    }
+
+    .slide-content .discount {
+      font-size: 18px;
+      font-weight: 600;
+      color: #2e7d32;
+      margin-bottom: 10px;
+    }
+
+    .slide-content .coupon {
+      background: #c0392b;
+      color: #fff;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 14px;
+      display: inline-block;
+    }
+
+    .slide img {
+      width: 100%;
+      border-radius: 10px;
+      object-fit: cover;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Navigation Buttons */
+    .nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 25px;
+      background: rgba(255, 255, 255, 0.8);
+      border: none;
+      cursor: pointer;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .prev {
+      left: 10px;
+    }
+    .next {
+      right: 10px;
+    }
+
+    /* Slider Dots */
+    .dots {
+      position: absolute;
+      bottom: 15px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #ddd;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .dot.active {
+      background: #fbc02d;
+    }
+
+    @media (max-width: 900px) {
+      .slide {
+        flex-direction: column;
+        text-align: center;
+      }
+      .slide-content, .slide img {
+        width: 100%;
+      }
+      .slide-content {
+        order: 2;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <div class="navbar">
+    <div class="logo">
+      <img src="https://cdn.fcglcdn.com/brainbees/images/n/fc_logo.png" alt="Logo">
+    </div>
+    <div class="search-bar">
+      <input type="text" placeholder="Search for a Category, Brand or Product">
+      <i>🔍</i>
+    </div>
+    <div class="nav-links">
+      <a href="#">Stores</a>
+      <a href="#">Support</a>
+      <a href="#">Track Order</a>
+      <a href="#">Login / Register</a>
+      <a href="#">Cart 🛒</a>
+    </div>
+  </div>
+
+  <!-- Category Bar -->
+  <div class="category-bar">
+    <a href="#">All Categories</a>
+    <a href="#">Boy Fashion</a>
+    <a href="#">Girl Fashion</a>
+    <a href="#">Footwear</a>
+    <a href="#">Toys</a>
+    <a href="#">Diapering</a>
+    <a href="#">Gear</a>
+    <a href="#">Feeding</a>
+    <a href="#">Bath</a>
+    <a href="#">Nursery</a>
+    <a href="#">Moms</a>
+    <a href="#">Health</a>
+    <a href="#">Boutiques</a>
+  </div>
+
+  <!-- HERO SLIDER -->
+  <div class="hero-slider">
+    <div class="slides">
+      <!-- Slide 1 -->
+      <div class="slide">
+        <div class="slide-content">
+          <h2>Most Essential Gear Products</h2>
+          <p>Strollers | High Chair | Ride-Ons | Tricycles & more</p>
+          <div class="discount">Flat 40% OFF for Club Members</div>
+          <div class="coupon">Coupon: SMYLE</div>
+        </div>
+        <img src="https://cdn.fcglcdn.com/brainbees/banners/hp-banner_994x3991758696554456.webp" alt="Gear Products">
+      </div>
+
+      <!-- Slide 2 -->
+      <div class="slide">
+        <div class="slide-content">
+          <h2>Wedding Beauty Sale</h2>
+          <p>100% Original Products • Limited Time Offer</p>
+          <div class="discount">Up to 50% OFF</div>
+          <div class="coupon">Shop Now</div>
+        </div>
+        <img src="https://cdn.fcglcdn.com/brainbees/banners/mktng_nonapps_base_fn_hp_5november251762246489905.webp" alt="Beauty Sale">
+      </div>
+
+      <!-- Slide 3 -->
+      <div class="slide">
+        <div class="slide-content">
+          <h2>Newborn Essentials</h2>
+          <p>Shop the softest and safest products for your little one.</p>
+          <div class="discount">30% OFF on Baby Kits</div>
+          <div class="coupon">Use Code: NEWBORN</div>
+        </div>
+        <img src="https://images.unsplash.com/photo-1510626176961-4b57d4fbad03?w=800" alt="Baby Essentials">
+      </div>
+    </div>
+
+    <!-- Navigation Arrows -->
+    <button class="nav-btn prev">❮</button>
+    <button class="nav-btn next">❯</button>
+
+    <!-- Dots -->
+    <div class="dots"></div>
+  </div>
+
+   <section class="premium-boutiques">
+    <h2 class="section-title">Premium Boutiques</h2>
+    <div class="boutique-container">
+
+      <!-- Card 1 -->
+      <div class="boutique-card">
+        <img src="https://cdn.fcglcdn.com/brainbees/images/boutique/670x670/31181.webp" alt="Winter Wonderland">
+        <div class="card-info">
+          <h3>New Arrivals Up To 14Y</h3>
+          <p>Flat 40% Off</p>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="boutique-card">
+        <img src="https://cdn.fcglcdn.com/brainbees/images/boutique/670x670/37945.webp" alt="Classic Comfort">
+        <div class="card-info">
+          <h3>Classic Comfort For Every Day 2+</h3>
+          <p>Explore Dungarees, Jumpsuits & more</p>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="boutique-card">
+        <img src="https://cdn.fcglcdn.com/brainbees/images/boutique/670x670/31186.webp" alt="Modern Mom">
+        <div class="card-info">
+          <h3>Sustainable Styles For Modern Moms</h3>
+          <p>Explore Organic Picks & more</p>
+        </div>
+      </div>
+      <div class="boutique-card">
+        <img src="https://cdn.fcglcdn.com/brainbees/images/boutique/670x670/37947.webp" alt="Classic Comfort">
+        <div class="card-info">
+          <h3>Classic Comfort For Every Day 2+</h3>
+          <p>Adorable looks for little snuggulers | U...</p>
+        </div>
+      </div>
+      <div class="boutique-card">
+        <img src="https://cdn.fcglcdn.com/brainbees/images/boutique/670x670/37948.webp" alt="Classic Comfort">
+        <div class="card-info">
+          <h3>Everyday essentials, Endless Style | Up..</h3>
+          <p>Explore comfy tees & More </p>
+        </div>
+      </div>
+      <div class="boutique-card">
+        <img src="https://cdn.fcglcdn.com/brainbees/images/boutique/670x670/37949.webp" alt="Classic Comfort">
+        <div class="card-info">
+          <h3>Cute Winter Essentials | Up To 14Y</h3>
+          <p>Explore Dungarees, Jumpsuits & more</p>
+        </div>
+      </div>
+      <div class="boutique-card">
+        <img src="https://cdn.fcglcdn.com/brainbees/images/boutique/670x670/37937.webp" alt="Classic Comfort">
+        <div class="card-info">
+          <h3>Classic Comfort For Every Day 2+</h3>
+          <p>Explore Dungarees, Jumpsuits & more</p>
+        </div>
+      </div>
+      <div class="boutique-card">
+        <img src="https://cdn.fcglcdn.com/brainbees/images/boutique/670x670/37938.webp" alt="Classic Comfort">
+        <div class="card-info">
+          <h3>Classic Comfort For Every Day 2+</h3>
+          <p>Explore Dungarees, Jumpsuits & more</p>
+        </div>
+      </div>
+      <div class="boutique-card">
+        <img src="https://cdn.fcglcdn.com/brainbees/images/boutique/670x670/37939.webp" alt="Classic Comfort">
+        <div class="card-info">
+          <h3>Classic Comfort For Every Day 2+</h3>
+          <p>Explore Dungarees, Jumpsuits & more</p>
+        </div>
+      </div>
+      <div class="boutique-card11">
+        <a href="#" class="view-all-btn">View All Boutiques ➔</a>
+      </div>
+      
+
+
+
+
+
+
+
+    </div>
+  </section>
+
+     <!-- === SALE SECTION === -->
+  <!-- === SALE SECTION === -->
+  <section class="sale-section">
+    <div class="sale-container">
+      
+      <!-- LEFT IMAGE -->
+      <div class="sale-image">
+        <img src="images\baby winter dress.jpeg" alt="Winter Sale Image">
+      </div>
+
+      <!-- RIGHT TEXT CONTENT -->
+      <div class="sale-content">
+        <h1 class="sale-title">75% Flat Available</h1>
+        <p class="sale-subtext">Use Coupon Code:</p>
+        <div class="coupon-box">
+          <span class="coupon-code">SAVE75</span>
+        </div>
+        <button class="shop-btn">Shop Now</button>
+      </div>
+
+    </div>
+  </section>
+   <!-- === MORE FOR LESS SECTION === -->
+  <section class="more-for-less">
+    <h2 class="section-title">More For Less</h2>
+    <div class="card-container">
+      
+      <!-- Card 1 -->
+      <div class="card">
+        <img src="https://cdn.fcglcdn.com/brainbees/images/cattemplate/heavy_winter_desktop_page_281025_04.jpg" alt="Kids Fashion 399">
+       
+      </div>
+         <!-- Card 3 -->
+      <div class="card">
+        <img src="https://cdn.fcglcdn.com/brainbees/images/cattemplate/heavy_winter_desktop_page_281025_05.jpg" alt="Kids Fashion 799">
+        
+      </div>
+
+      <!-- Card 4 -->
+      <div class="card">
+        <img src="https://cdn.fcglcdn.com/brainbees/images/cattemplate/heavy_winter_desktop_page_281025_06.jpg" alt="Kids Fashion 999">
+        
+      </div>
+
+    </div>
+  </section>
+
+  <!-- === SEASON'S SPECIAL SECTION === -->
+  <section class="seasons-special">
+    <div class="section-header">
+      <h2>Season's Special</h2>
+      <p>Pick Your Winter Wardrobe Refresh Pieces</p>
+    </div>
+
+    <div class="special-grid">
+
+      <!-- Card 1 -->
+      <div class="special-card">
+        <img src="https://cdn.fcglcdn.com/brainbees/images/cattemplate/heavy_winter_desktop_page_281025_09.jpg" alt="Hoodies">
+        
+      </div>
+
+      <!-- Card 2 -->
+      <div class="special-card">
+        <img src="https://cdn.fcglcdn.com/brainbees/images/cattemplate/heavy_winter_desktop_page_281025_10.jpg" alt="Sweatshirts">
+        
+      </div>
+
+      <!-- Card 3 -->
+      <div class="special-card">
+        <img src="https://cdn.fcglcdn.com/brainbees/images/cattemplate/heavy_winter_desktop_page_281025_11.jpg" alt="Co-ords">
+
+      </div>
+
+      <!-- Card 4 -->
+      <div class="special-card">
+        <img src="https://cdn.fcglcdn.com/brainbees/images/cattemplate/heavy_winter_desktop_page_281025_12.jpg" alt="Pullovers">
+        
+      </div>
+
+      <!-- Card 5 -->
+      <div class="special-card">
+        <img src="https://cdn.fcglcdn.com/brainbees/images/cattemplate/heavy_winter_desktop_page_281025_13.jpg" alt="Jackets">
+        
+      </div>
+
+      <!-- Card 6 -->
+      <div class="special-card">
+        <img src="https://cdn.fcglcdn.com/brainbees/images/cattemplate/heavy_winter_desktop_page_281025_16.jpg" alt="Sweaters">
+        
+      </div>
+
+      <!-- Card 7 -->
+      <div class="special-card">
+        <img src="https://cdn.fcglcdn.com/brainbees/images/cattemplate/heavy_winter_desktop_page_281025_14.jpg" alt="Turtlenecks">
+        
+      </div>
+
+      <!-- Card 8 -->
+      <div class="special-card">
+        <img src="https://cdn.fcglcdn.com/brainbees/images/cattemplate/heavy_winter_desktop_page_281025_15.jpg" alt="Cardigans">
+
+      </div>
+
+    </div>
+  </section>
+
+
+
+  
+
+  
+
+
+  <!-- JavaScript for Slider -->
+  <script>
+    const slides = document.querySelector('.slides');
+    const slideCount = document.querySelectorAll('.slide').length;
+    const dotsContainer = document.querySelector('.dots');
+    let index = 0;
+
+    // Create dots dynamically
+    for (let i = 0; i < slideCount; i++) {
+      const dot = document.createElement('div');
+      dot.classList.add('dot');
+      if (i === 0) dot.classList.add('active');
+      dot.addEventListener('click', () => showSlide(i));
+      dotsContainer.appendChild(dot);
+    }
+
+    const dots = document.querySelectorAll('.dot');
+
+    function showSlide(i) {
+      index = i;
+      slides.style.transform = `translateX(-${i * 100}%)`;
+      dots.forEach(d => d.classList.remove('active'));
+      dots[i].classList.add('active');
+    }
+
+    document.querySelector('.next').addEventListener('click', () => {
+      index = (index + 1) % slideCount;
+      showSlide(index);
+    });
+
+    document.querySelector('.prev').addEventListener('click', () => {
+      index = (index - 1 + slideCount) % slideCount;
+      showSlide(index);
+    });
+
+    // Auto-slide
+    setInterval(() => {
+      index = (index + 1) % slideCount;
+      showSlide(index);
+    }, 4000);
+  </script>
+</body>
+</html>
